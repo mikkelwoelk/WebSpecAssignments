@@ -1,2 +1,2 @@
 # WebSpecAssignments
-Handin folder for JS assignemts
+Handin folder for JS assignments
