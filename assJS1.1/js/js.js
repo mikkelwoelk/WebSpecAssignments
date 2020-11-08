@@ -1,4 +1,5 @@
 'use strict';
+
 let x = 2;
 document.getElementById('dice').innerHTML = x;
 let btn = document.getElementById('btn');
