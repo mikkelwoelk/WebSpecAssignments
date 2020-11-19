@@ -57,13 +57,14 @@ const record = function () {
     setTimeout( function () {
         btn.addEventListener('click', play);
         btn.style.backgroundColor = 'white';
-        }, 10000);
+        }, 3000);
 };
 
 const handler = function (e) {
     let j = e.target.id.charAt(e.target.id.length - 1); // get index for magic
     $(e.target.id).innerHTML = magic[j] * j;
     makeScorePadInSensitive();
+    resetFreeze();
 };
 
 const makeScorePadInSensitive = function () {
@@ -82,7 +83,6 @@ const makeScorePadSensitive = function () {
         }
     }
 };
-
 
 const makeDie = function (i) {
     let die = document.createElement('div');
