@@ -3,12 +3,12 @@ const doThis = function () {
     let secondNum = window.prompt('write another number');
     let thirdNum = window.prompt('write one more number');
 
-    if (firstNum > secondNum && firstNum > thirdNum){
-        console.log('1st is the highest');
-    } else if (secondNum > thirdNum && secondNum > firstNum){
-        console.log('2nd is the highest');
+    if (firstNum > secondNum && thirdNum){
+        console.log('1st is the highest number:' + ' ' + firstNum);
+    } else if (secondNum > thirdNum && firstNum){
+        console.log('2nd is the highest number:' + ' ' + secondNum);
     } else {
-        console.log('3rd is the highest');
+        console.log('3rd is the highest number:' + ' ' + thirdNum);
     }
 }
 
