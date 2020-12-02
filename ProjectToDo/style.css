@@ -13,12 +13,13 @@ main{
 
 #todo{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     width: 500px;
     height: 100vh;
     position: relative;
+    margin-top: 50px;
 }
 #todo .fa-chevron-down{
     position: absolute;

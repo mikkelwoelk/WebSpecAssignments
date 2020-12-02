@@ -1,9 +1,8 @@
-/*******  TO DO LIST *******/
+/*******  OPTIMIZED TO DO LIST *******/
 
 // Shortkey for declaring variables through ID's
-const $ = function(id){
-    return document.getElementById(id);
-}
+const $ = function(id){return document.getElementById(id);}
+
 // Declarations
 let todoList = $('todoItemList');
 let addBtn = $('addItem');
@@ -87,11 +86,8 @@ function addItem () {
         liText.innerHTML = txt;
     }
 
-    //
-    textField.focus();
-    // Resets the input field
-    textField.value = '';
-    } 
+    resetAndFocus();
+} 
    
 // check if input value is > 0, if yes = run addItem function
 function addItemAfterClick(){
@@ -108,6 +104,14 @@ function addItemAfterKeypress(e){
     } else if (textField.value.length == 0 && e.key === 'Enter'){
         alert('You forgot to put in some text');
     }
+}
+
+
+const resetAndFocus = function () {
+    // Resets the focus back onto the input field
+    textField.focus();
+    // Resets the input field
+    textField.value = '';
 }
 
 addBtn.addEventListener('click', addItemAfterClick);
