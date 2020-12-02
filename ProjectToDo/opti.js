@@ -10,11 +10,18 @@ let todoListItms = $('todoItemList').childNodes;
 
 // Adds item with everything in it to the list
 const addItem = function () {
-    createListItem();
-    createListItemDivs();
-    createListItemBtns();
+    createElements();
     appendElements();
+    resetAndFocus();
     console.log('item added');
+}
+
+const createElements = function () {
+    createListItem();
+    createListTextDiv();
+    createListBtnDiv();
+    createListDeleteBtn();
+    createListEditBtn();
 }
 
 // Creates a new list item with classname
@@ -22,75 +29,95 @@ const createListItem = function () {
     const newLi = document.createElement('li');
     newLi.setAttribute('class', 'todoItem');
     console.log('list item created');
+    newLi.addEventListener('click', highlightItem);
+    newLi.append(createListTextDiv(), createListBtnDiv());
+
+    return newLi;
 }
 
 // Creates two divs inside the new list item with classnames
-const createListItemDivs = function () {
+const createListTextDiv = function () {
     const liText = document.createElement('div');
     liText.setAttribute('class', 'liText');
+    liText.appendChild(createText());
 
+    return liText;
+}
+
+const createListBtnDiv = function () { 
     const liBtns = document.createElement('div');
     liBtns.setAttribute('class', 'liBtns');
-    console.log('inner divs created');
+    liBtns.append(createListEditBtn(), createListDeleteBtn());
+
+    return liBtns;
 }
 
 // Creates an edit button and a delete button with classnames and icons
-const createListItemBtns = function () {
+const createListDeleteBtn = function () {
     const newDeleteBtn = document.createElement('button');
     newDeleteBtn.setAttribute('class', 'deleteBtn');
     newDeleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
+    newDeleteBtn.addEventListener('click', deleteItem);
     
+    return newDeleteBtn;
+}
+
+const createListEditBtn = function () {
     const newEditBtn = document.createElement('button');
     newEditBtn.setAttribute('class', 'editBtn');
     newEditBtn.innerHTML = '<i class="fas fa-pencil-alt"></i>';
-    console.log('inner buttons created');
+    newEditBtn.addEventListener('click', editItem);
+
+    return newEditBtn;
 }
 
 // Creates a textnode from input
 const createText = function () {
-    const liUserText = document.createTextNode(textInput);
+    const liUserText = document.createTextNode(textField.value);
     
+    return liUserText;
 }
 
 // Appends everything
 const appendElements = function () {
-    liText.appendChild(liUserText);
-    liBtns.append(newEditBtn, newDeleteBtn);
-    newLi.append(liText, liBtns);
-    todoList.append(newLi);
-    console.log('elements appended');
+    todoList.appendChild(createListItem());
 }
 
-// Adds event listeners to each li element and their buttons
-/*todoListItms.forEach(function() {
-    newDeleteBtn.addEventListener('click', deleteItem);
-    newLi.addEventListener('click', crossItem);
-    newEditBtn.addEventListener('click', editItem);
-    console.log('event listeners added');
-});*/
-
-// Deletes a list item
-function deleteItem () {
-    newLi.remove();
+// Deletes a list item when clicking on the delete button
+function deleteItem (e) {
+    let p = e.target.parentElement;
+    let pp = p.parentElement;
+    let ppp = pp.parentElement;
+    let pppp = ppp.parentElement;
+    pppp.removeChild(ppp);
 }
 
 // Delete all list items
 const deleteAllItems = function () {
-    todoListItms.forEach(function() {
-        newLi.remove();
-    })
+    todoList.remove(createListItem);
 }
 
 // Highlight a list item
-const highlightItem = function () {
-    if (newLi.classList.contains('done')){
-        newLi.classList.remove('done');
+
+const highlightItem = function (e) {
+    if (e.target.classList.contains('done')){
+        e.target.classList.remove('done');
     } else {
-        newLi.classList.add('done');
+        e.target.classList.add('done');
     }
 }
 
 // Ability to edit list item
+const editItem = function () {
+    let txt;
+    let newText = prompt('Edit item', createListTextDiv().innerHTML);
+    if (newText == null || newText == ''){
+        txt = textField.value;
+    } else {
+        txt = newText;
+    }
+    createListItem().innerHTML = txt;
+}
 
 // Resets and focuses input
 const resetAndFocus = function () {
